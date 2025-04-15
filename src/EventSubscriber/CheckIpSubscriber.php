@@ -28,7 +28,7 @@ class CheckIpSubscriber
             ReflectionHelper::getClassReflection($event->getMethod()),
             CheckIp::class,
         ) as $attribute) {
-            if (empty($checkIp->envKey)) {
+            if (empty($attribute->envKey)) {
                 return;
             }
             $this->checkIp($this->requestStack->getMainRequest(), $attribute);
