@@ -22,7 +22,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tourze\\JsonRPCCheckIPBundle\\Tests\\": "src"
+      "Tourze\\JsonRPCCheckIPBundle\\Tests\\": "tests"
     }
   },
   "require-dev": {
