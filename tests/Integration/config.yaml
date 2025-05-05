@@ -1,0 +1,9 @@
+framework:
+  test: true
+  http_method_override: false
+  router:
+    resource: ~
+    type: service
+  php_errors:
+    log: true
+  secret: 'test'
