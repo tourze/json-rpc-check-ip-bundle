@@ -4,11 +4,14 @@ namespace Tourze\JsonRPCCheckIPBundle\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Tourze\IntegrationTestKernel\IntegrationTestKernel;
 use Tourze\JsonRPC\Core\Exception\ApiException;
 use Tourze\JsonRPCCheckIPBundle\Attribute\CheckIp;
 use Tourze\JsonRPCCheckIPBundle\EventSubscriber\CheckIpSubscriber;
+use Tourze\JsonRPCCheckIPBundle\JsonRPCCheckIPBundle;
 
 /**
  * 由于底层库的限制，我们将集成测试转换为高级单元测试
@@ -86,5 +89,27 @@ class JsonRPCCheckIPIntegrationTest extends TestCase
 
         // 调用私有方法
         $method->invoke($subscriber, $request, new CheckIp('TEST_IP_ENV'));
+    }
+
+    protected static function getKernelClass(): string
+    {
+        return IntegrationTestKernel::class;
+    }
+
+    protected static function createKernel(array $options = []): IntegrationTestKernel
+    {
+        $appendBundles = [
+            FrameworkBundle::class => ['all' => true],
+            JsonRPCCheckIPBundle::class => ['all' => true],
+        ];
+        
+        $entityMappings = [];
+
+        return new IntegrationTestKernel(
+            $options['environment'] ?? 'test',
+            $options['debug'] ?? true,
+            $appendBundles,
+            $entityMappings
+        );
     }
 }
