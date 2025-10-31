@@ -1,23 +1,25 @@
 <?php
 
-namespace Tourze\JsonRPCCheckIPBundle\Attribute;
+namespace Tourze\JsonRPCCheckIPBundle\Tests\Attribute;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Tourze\JsonRPCCheckIPBundle\Attribute\CheckIp;
 
 /**
- * CheckIp 属性类的测试
+ * @internal
  */
-class CheckIpTest extends TestCase
+#[CoversClass(CheckIp::class)]
+final class CheckIpTest extends TestCase
 {
-    public function testConstructor_withDefaultValue(): void
+    public function testConstructorWithDefaultValue(): void
     {
         // 测试默认值
         $checkIp = new CheckIp();
         $this->assertSame('', $checkIp->envKey);
     }
 
-    public function testConstructor_withCustomValue(): void
+    public function testConstructorWithCustomValue(): void
     {
         // 测试自定义值
         $checkIp = new CheckIp('CUSTOM_IP_KEY');

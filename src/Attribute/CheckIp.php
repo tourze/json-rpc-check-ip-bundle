@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\JsonRPCCheckIPBundle\Attribute;
 
 /**
@@ -7,7 +9,7 @@ namespace Tourze\JsonRPCCheckIPBundle\Attribute;
  *
  * 一般来讲，我们只有服务端对服务端的接口才需要做这个检测
  */
-#[\Attribute(\Attribute::TARGET_CLASS)]
+#[\Attribute(flags: \Attribute::TARGET_CLASS)]
 class CheckIp
 {
     public function __construct(
