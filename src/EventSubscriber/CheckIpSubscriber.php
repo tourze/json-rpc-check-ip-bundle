@@ -15,7 +15,7 @@ use Tourze\JsonRPCCheckIPBundle\Attribute\CheckIp;
 /**
  * 读取主请求的IP并判断是否符合要求
  */
-class CheckIpSubscriber
+final class CheckIpSubscriber
 {
     public function __construct(
         private readonly RequestStack $requestStack,

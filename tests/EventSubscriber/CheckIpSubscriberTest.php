@@ -7,10 +7,13 @@ use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Tourze\JsonRPC\Core\Contracts\RpcParamInterface;
+use Tourze\JsonRPC\Core\Contracts\RpcResultInterface;
 use Tourze\JsonRPC\Core\Domain\JsonRpcMethodInterface;
 use Tourze\JsonRPC\Core\Event\BeforeMethodApplyEvent;
 use Tourze\JsonRPC\Core\Exception\ApiException;
 use Tourze\JsonRPC\Core\Model\JsonRpcRequest;
+use Tourze\JsonRPC\Core\Result\EmptyResult;
 use Tourze\JsonRPCCheckIPBundle\Attribute\CheckIp;
 use Tourze\JsonRPCCheckIPBundle\EventSubscriber\CheckIpSubscriber;
 use Tourze\PHPUnitSymfonyKernelTest\AbstractEventSubscriberTestCase;
@@ -217,15 +220,14 @@ final class CheckIpSubscriberTest extends AbstractEventSubscriberTestCase
 
         // 创建包含CheckIp属性的模拟方法类
         $mockMethod = new #[CheckIp(envKey: 'TEST_IP_ENV')] class implements JsonRpcMethodInterface {
-            public function __invoke(JsonRpcRequest $request): mixed
+            public function __invoke(JsonRpcRequest $request): RpcResultInterface
             {
-                return null;
+                return new EmptyResult();
             }
 
-            /** @return array<string, mixed> */
-            public function execute(): array
+            public function execute(RpcParamInterface $param): RpcResultInterface
             {
-                return [];
+                return new EmptyResult();
             }
         };
 
@@ -255,15 +257,14 @@ final class CheckIpSubscriberTest extends AbstractEventSubscriberTestCase
 
         // 创建包含CheckIp属性的模拟方法类
         $mockMethod = new #[CheckIp(envKey: 'TEST_IP_ENV')] class implements JsonRpcMethodInterface {
-            public function __invoke(JsonRpcRequest $request): mixed
+            public function __invoke(JsonRpcRequest $request): RpcResultInterface
             {
-                return null;
+                return new EmptyResult();
             }
 
-            /** @return array<string, mixed> */
-            public function execute(): array
+            public function execute(RpcParamInterface $param): RpcResultInterface
             {
-                return [];
+                return new EmptyResult();
             }
         };
 
@@ -290,15 +291,14 @@ final class CheckIpSubscriberTest extends AbstractEventSubscriberTestCase
 
         // 创建没有CheckIp属性的模拟方法类
         $mockMethod = new class implements JsonRpcMethodInterface {
-            public function __invoke(JsonRpcRequest $request): mixed
+            public function __invoke(JsonRpcRequest $request): RpcResultInterface
             {
-                return null;
+                return new EmptyResult();
             }
 
-            /** @return array<string, mixed> */
-            public function execute(): array
+            public function execute(RpcParamInterface $param): RpcResultInterface
             {
-                return [];
+                return new EmptyResult();
             }
         };
 

@@ -6,7 +6,7 @@ namespace Tourze\JsonRPCCheckIPBundle\DependencyInjection;
 
 use Tourze\SymfonyDependencyServiceLoader\AutoExtension;
 
-class JsonRPCCheckIPExtension extends AutoExtension
+final class JsonRPCCheckIPExtension extends AutoExtension
 {
     protected function getConfigDir(): string
     {
